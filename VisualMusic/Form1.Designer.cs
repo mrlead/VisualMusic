@@ -1,6 +1,6 @@
 ﻿namespace VisualMusic
 {
-    partial class Form1
+    partial class mainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -51,16 +51,19 @@
             this.butSettings.Size = new System.Drawing.Size(55, 57);
             this.butSettings.TabIndex = 1;
             this.butSettings.UseVisualStyleBackColor = true;
+            this.butSettings.Click += new System.EventHandler(this.butSettings_Click);
             // 
-            // Form1
+            // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1082, 761);
             this.Controls.Add(this.butSettings);
             this.Controls.Add(this.blinkTable);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "mainForm";
+            this.Text = "VisualMusic";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainForm_FormClosing);
+            this.Load += new System.EventHandler(this.mainForm_Load);
             this.ResumeLayout(false);
 
         }
