@@ -52,7 +52,7 @@
             this.blinkGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.blinkGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.blinkGrid.ColumnHeadersVisible = false;
-            this.blinkGrid.Location = new System.Drawing.Point(12, 214);
+            this.blinkGrid.Location = new System.Drawing.Point(12, 285);
             this.blinkGrid.Name = "blinkGrid";
             this.blinkGrid.ReadOnly = true;
             this.blinkGrid.RowHeadersVisible = false;
@@ -60,7 +60,7 @@
             this.blinkGrid.ShowCellToolTips = false;
             this.blinkGrid.ShowEditingIcon = false;
             this.blinkGrid.ShowRowErrors = false;
-            this.blinkGrid.Size = new System.Drawing.Size(1058, 535);
+            this.blinkGrid.Size = new System.Drawing.Size(1058, 464);
             this.blinkGrid.TabIndex = 2;
             // 
             // mainForm
