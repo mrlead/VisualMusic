@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace VisualMusic
@@ -12,10 +13,12 @@ namespace VisualMusic
         IniFiles INI = new IniFiles("data.ini");
 
         public int row, col = 0;
+        Color emptyColor, fullColor = Color.FromArgb(0,0,0,0);
         public string path;
 
         public mainForm()
         {
+            //CallBackMy.callbackEventHandler = new CallBackMy.callbackEvent(this.CreateTable);
             InitializeComponent();
         }
 
@@ -25,20 +28,16 @@ namespace VisualMusic
             try
             {
                 tableSet = currentUserKey.OpenSubKey("VisualMusic");
-            }
-            catch
-            {
-                row = Convert.ToInt32(INI.ReadINI("table", "row"));
-                col = Convert.ToInt32(INI.ReadINI("table", "col"));
-
-                tableSet = currentUserKey.CreateSubKey("VisualMusic");
                 row = Convert.ToInt32(tableSet.GetValue("row").ToString());
                 col = Convert.ToInt32(tableSet.GetValue("col").ToString());
 
                 tableSet.Close();
             }
-            finally
+            catch
             {
+                /*row = Convert.ToInt32(INI.ReadINI("row", "table"));
+                col = Convert.ToInt32(INI.ReadINI("col", "table"));*/
+                tableSet = currentUserKey.CreateSubKey("VisualMusic");
                 row = Convert.ToInt32(tableSet.GetValue("row").ToString());
                 col = Convert.ToInt32(tableSet.GetValue("col").ToString());
 
@@ -52,20 +51,17 @@ namespace VisualMusic
             try
             {
                 tableSet = currentUserKey.CreateSubKey("VisualMusic");
-            }
-            catch
-            {
-                INI.Write("table", "row", Convert.ToString(row));
-                INI.Write("table", "col", Convert.ToString(col));
-
-                tableSet = currentUserKey.CreateSubKey("VisualMusic");
                 tableSet.SetValue("row", Convert.ToString(row));
                 tableSet.SetValue("col", Convert.ToString(col));
 
                 tableSet.Close();
             }
-            finally
+            catch
             {
+                /*INI.Write("table", "row", Convert.ToString(row));
+                INI.Write("table", "col", Convert.ToString(col));*/
+
+                tableSet = currentUserKey.CreateSubKey("VisualMusic");
                 tableSet.SetValue("row", Convert.ToString(row));
                 tableSet.SetValue("col", Convert.ToString(col));
 
@@ -76,7 +72,45 @@ namespace VisualMusic
         private void butSettings_Click(object sender, EventArgs e)
         {
             settingsForm newForm = new settingsForm();
-            newForm.Show();
+            if(newForm.ShowDialog() == DialogResult.OK)
+            {
+                emptyColor = newForm.GetColorEmpty;
+                fullColor = newForm.GetColorFull;
+                col = newForm.GetCol;
+                row = newForm.GetRow;
+
+                CreateTable(row, col);
+            }
+        }
+
+        public void CreateTable(int rows, int cols)
+        {
+            if (blinkGrid.Columns.Count != 0)
+            {
+                blinkGrid.Columns.Clear();
+                blinkGrid.Rows.Clear();
+
+                for (int j = 0; j < cols; j++)
+                {
+                    blinkGrid.Columns.Add("", "");
+                }
+                for (int i = 0; i < rows; i++)
+                {
+                    blinkGrid.Rows.Add();
+                }
+            }
+            else
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    blinkGrid.Columns.Add("", "");
+                }
+                for (int i = 0; i < rows; i++)
+                {
+                    blinkGrid.Rows.Add();
+                }
+            }
+            
         }
     }
 

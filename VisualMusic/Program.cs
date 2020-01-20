@@ -19,4 +19,10 @@ namespace VisualMusic
             Application.Run(new mainForm());
         }
     }
+
+    public static class CallBackMy
+    {
+        public delegate void callbackEvent(string what);
+        public static callbackEvent callbackEventHandler;
+    }
 }
